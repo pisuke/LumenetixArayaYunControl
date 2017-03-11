@@ -79,6 +79,22 @@ void process(BridgeClient client) {
   if (command == "hue") {
     hueCommand(client);
   }
+
+  // is "task" command?
+  if (command == "task") {
+    taskCommand(client);
+  }
+
+  // is "warm" command?
+  if (command == "warm") {
+    warmCommand(client);
+  }
+
+  // is "cool" command?
+  if (command == "cool") {
+    coolCommand(client);
+  }
+  
 }
 
 
@@ -131,6 +147,41 @@ void hueCommand(BridgeClient client) {
   client.println(hue);
 }
 
+void taskCommand(BridgeClient client) {
+  int task;
+
+  // Read pin number
+  task = client.parseInt();
+  DmxSimple.write(1, task);
+
+  // Send feedback to client
+  client.print(F("Task light set to "));
+  client.println(task);
+}
+
+void warmCommand(BridgeClient client) {
+  int warm;
+
+  // Read pin number
+  warm = client.parseInt();
+  DmxSimple.write(2, warm);
+
+  // Send feedback to client
+  client.print(F("Warm light set to "));
+  client.println(warm);
+}
+
+void coolCommand(BridgeClient client) {
+  int cool;
+
+  // Read pin number
+  cool = client.parseInt();
+  DmxSimple.write(3, cool);
+
+  // Send feedback to client
+  client.print(F("Cool light set to "));
+  client.println(cool);
+}
     
   
   
